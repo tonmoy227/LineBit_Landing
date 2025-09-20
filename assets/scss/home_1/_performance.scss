@@ -1,0 +1,152 @@
+.lb-perfor-item-wrapper {
+	gap: 24px;
+	@media #{$md,$sm,$xs,$xxs} {
+		flex-wrap: wrap;
+	}
+}
+.lb-perfor-item {
+	width: 100%;
+	padding: 40px;
+	max-width: 460px;
+	border-radius: 12px;
+	background-color: #fff;
+	.item-grade {
+		gap: 12px;
+		display: flex;
+		color: #02021E;
+		font-size: 20px;
+		font-weight: 500;
+		margin-bottom: 14px;
+		align-items: center;
+		justify-content: center;
+		span {
+			width: 50px;
+			height: 50px;
+			display: flex;
+			border-radius: 100%;
+			align-items: center;
+			background: #FF720A1A;
+			justify-content: center;
+			b {
+				background: linear-gradient(75.96deg, #CE9400 13.64%, #FF008A 46.53%, #6100FF 78.88%);
+				background-clip: text;
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+			}
+		}
+	}
+	h3 {
+		color: #02021E;
+		line-height: 1;
+		font-weight: 700;
+		font-size: 100px;
+		letter-spacing: -4px;
+		padding-bottom: 16px;
+	}
+	p {
+		color: #4C4B62;
+		font-size: 24px;
+	}
+}
+
+.lb-perfor-progress {
+	padding: 48px;
+	margin: 0 auto;
+	gap: 30px 50px;
+	max-width: 1430px;
+	margin-top: 25px;
+	border-radius: 12px;
+	background-color: #fff;
+	@media #{$lg,$md,$sm,$xs,$xxs} {
+		flex-wrap: wrap;
+	}
+	@media #{$xxs} {
+		padding: 30px 15px;
+	}
+}
+
+.lb-perfor-prg-item1 {
+	gap: 20px;
+	width: 100%;
+	padding: 30px;
+	max-width: 400px;
+	border-radius: 12px;
+	background-color: #FFF1E7;
+	@media #{$xxs} {
+		flex-wrap: wrap;
+	}
+	.item-img {
+		
+	}
+	.item-text {
+		p {
+			color: #4C4B62;
+			line-height: 1;
+			font-size: 24px;
+			padding-bottom: 5px;
+		}
+		h3 {
+			color: #02021E;
+			font-weight: 700;
+		}
+	}
+}
+
+.lb-perfor-prg-item2 {
+	width: 100%;
+	max-width: 410px;
+
+	.progress-item {
+		width: 100%;
+		@media #{$sm,$xs} {
+			margin: 0 auto;
+		}
+	}
+	.progress-item h4 {
+		z-index: 1;
+		font-size: 24px;
+		font-weight: 700;
+		margin-bottom: 18px;
+		span {
+			font-weight: 400;
+		}
+	}
+	.progress-item .progress {
+		height: 12px;
+		border-radius: 0;
+		max-width: 336px;
+		overflow: visible;
+		display: block;
+		position: relative;
+		border-radius: 100px;
+		border: 1px solid #E6E2F3;
+		background-color: #FF720A1A;
+	}
+	.progress-item .progress span {
+		top: -15px;
+		right: -80px;
+		font-size: 28px;
+		font-weight: 600;
+		position: absolute;
+		background: linear-gradient(75.96deg, #CE9400 13.64%, #FF008A 46.53%, #6100FF 78.88%);
+		background-clip: text;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		@media #{$xl,$lg,$md,$sm,$xs,$xxs} {
+			right: 0;
+			top: -50px;
+		}
+	}
+	.progress-item .progress-bar {
+		top: 0px;
+		width: 0;
+		left: 0px;
+		float: left;
+		height: 12px;
+		position: relative;
+		border-radius: 30px;
+		transition: 1s all ease-in-out;
+		background-color: #FF720A;
+		-webkit-transition: 1s all ease-in-out;
+	}
+}
