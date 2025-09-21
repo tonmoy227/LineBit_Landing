@@ -15,7 +15,7 @@ Last change:    00/00/00
 
 // lenis-smooth-scroll
 	const lenis = new Lenis({
-		duration: .8, 
+		duration: 1.6, 
 		easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
 		direction: 'vertical', 
 		smooth: true, 
@@ -181,6 +181,48 @@ Last change:    00/00/00
 			}
 		});
 	}
+
+
+	if ($('.lb-testi-slider').length > 0 ) {
+		var slider = new Swiper('.lb-testi-slider', {
+			slidesPerView: 4,
+			loop: true,
+			spaceBetween: 24,
+			speed: 1000,
+			navigation: {
+				nextEl: ".lb-testi1-next",
+				prevEl: ".lb-testi1-prev",
+			},
+			pagination: {
+				el: ".lb-tst-pagi",
+				clickable: true,
+			},
+			autoplay: {
+				enabled: true,
+				delay: 6000
+			},
+			breakpoints: {
+				'1600': {
+					slidesPerView: 4,
+				},
+				'1400': {
+					slidesPerView: 3,
+				},
+				'992': {
+					slidesPerView: 2,
+				},
+				'768': {
+					slidesPerView: 1,
+				},
+				'576': {
+					slidesPerView: 1,
+				},
+				'0': {
+					slidesPerView: 1,
+				},
+			},
+		});
+	};
 
 
 })(jQuery);

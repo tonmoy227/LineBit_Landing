@@ -1,0 +1,142 @@
+.lb-testi-top-wrap {
+	.lb-sec-title {
+		.lb-title-btn {
+			gap: 20px;
+		}
+		.lb-btn1 {
+			a {
+				i {
+					color: #fff;
+					background: var(--tz-prime-c1);
+				}
+				span {
+					background: #000;
+				}
+			}
+		}
+	}
+	.item-desc {
+		font-size: 18px;
+		max-width: 485px;
+	}
+}
+.lb-testi-slider {
+	margin-left: -210px;
+	margin-right: -210px;
+	@media #{$xl,$lg,$md,$sm,$xs,$xxs} {
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+}
+.lb-testi-item {
+	padding: 40px;
+	margin: 0 auto;
+	max-width: 557px;
+	border-radius: 12px;
+	background-color: #fff;
+	.auth-img {
+		width: 60px;
+		height: 60px;
+		overflow: hidden;
+		border-radius: 12px;
+	}
+	.auth-text {
+		h3 {
+			font-size: 20px;
+			font-weight: 600;
+			padding-bottom: 2px;
+			text-transform: uppercase;
+		}
+		span {
+			color: #4C4B62;
+			font-size: 16px;
+		}
+	}
+	.auth-img-icon {
+		gap: 16px;
+	}
+	.item-icon {
+		opacity: .3;
+		color: #02021E;
+		font-size: 30px;
+	}
+	.item-desc-img {
+		gap: 55px 0px;
+	}
+	.item-desc {
+		p {
+			color: #4C4B62;
+			font-size: 18px;
+			padding-bottom: 60px;
+		}
+		.item-rate {
+			li {
+				color: #FFB400;
+			}
+		}
+	}
+	.item-img {
+		overflow: hidden;
+		border-radius: 12px;
+	}
+}
+.lb-testi-nav-pagi {
+	gap: 30px;
+	.lb-tst-pagi {
+		display: flex;
+		.swiper-pagination-bullet {
+			margin: 0;
+			height: 4px;
+			width: 100%;
+			max-width: 240px;
+			border-radius: 0;
+			position: relative;
+			background-color: rgba(0, 0, 0, .5);
+			&:before {
+				top: 0;
+				left: 0;
+				height: 100%;
+				content: '';
+				width: 0%;
+				position: absolute;
+				background-color: #000000;
+				transition: all 500ms ease-in-out;
+			}
+			&:is(.swiper-pagination-bullet-active) {
+				background-color: transparent;
+				&:before {
+					width: 100%;
+				}
+			}
+		}
+	}
+}
+.lb-testi1-prev,
+.lb-testi1-next {
+	width: 72px;
+	height: 72px;
+	z-index: 1;
+	position: relative;
+	border-radius: 100%;
+	background-color: #fff;
+	transition: all 500ms ease-in-out;
+	&:before {
+		top: 0;
+		left: 0;
+		z-index: -1;
+		width: 100%;
+		content: '';
+		height: 100%;
+		position: absolute;
+		border-radius: 100%;
+		transform: scale(0);
+		background: linear-gradient(75.96deg, #CE9400 13.64%, #FF008A 46.53%, #6100FF 78.88%);
+		transition: all 500ms ease-in-out;
+	}
+	&:hover {
+		color: #fff;
+		&:before {
+			transform: scale(1.0);
+		}
+	}
+}
