@@ -65,12 +65,16 @@
 	margin-top: 40px;
 	border-radius: 24px;
 	background-color: #F6F6F6;
+	.item-img1 {
+
+	}
 	@media #{$xxl,$xl,$lg,$md,$sm,$xs,$xxs} {
 		padding: 50px 20px;
 	}
 	.item-img2 {
 		top: 50%;
 		left: 0px;
+		z-index: 2;
 		overflow: hidden;
 		border-radius: 12px;
 		transform: translateY(-50%);

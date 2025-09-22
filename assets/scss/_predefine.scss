@@ -112,6 +112,29 @@ body::-webkit-scrollbar-thumb {
 	color: var(--tz-title-color);
 	font-family: var(--tz-heading);
 }
+@keyframes floatUp {
+	0%{
+		transform: translateY(-20px);
+	}
+	50% {
+		transform: translateY(20px);
+	}
+	100% {
+		transform: translateY(-20px);
+	}
+}
+
+@keyframes floatDown {
+	0%{
+		transform: translateY(20px);
+	}
+	50% {
+		transform: translateY(-20px);
+	}
+	100% {
+		transform: translateY(20px);
+	}
+}
 #preloader { 
 	position: fixed; 
 	left: 0;
@@ -128,8 +151,20 @@ body::-webkit-scrollbar-thumb {
 		text-align: center;
 		position: absolute;
 		transform: translateY(-50%);
-		img {
-			animation: TXTImgIn 1500ms ease-in-out infinite;
+		h2 {
+			font-size: 50px;
+			font-weight: 800;
+			position: relative;
+			letter-spacing: 5px;
+			color: #FDC448;
+			div {
+				&:nth-child(odd) {
+					animation: floatUp  2s linear infinite;
+				}
+				&:nth-child(even) {
+					animation: floatDown 2s  linear  infinite;
+				}
+			}
 		}
 	}
 }
@@ -259,6 +294,27 @@ a {
 		display: inherit;
 	}
 }
+.lb-scrollup {
+	color: #fff;
+	width: 50px;
+	right: 20px;
+	z-index: 5;
+	height: 50px;
+	bottom: 20px;
+	display: none;
+	font-size: 16px;
+	position: fixed;
+	font-weight: 700;
+	line-height: 55px;
+	border-radius: 100%;
+	background: linear-gradient(75.96deg, #CE9400 13.64%, #FF008A 46.53%, #6100FF 78.88%);
+	i {
+		color: #fff;
+	}
+	&:hover {
+		color: #fff;
+	}
+}
 .img-cover {
 	width: 100%;
 	height: 100%;
@@ -280,8 +336,24 @@ a {
 }
 .lb-btn1 {
 	a {
+		z-index: 1;
 		display: flex;
+		position: relative;
 		align-items: center;
+		overflow: hidden;
+		border-radius: 48px;
+		&:before {
+			top: 0;
+			left: 0;
+			width: 51px;
+			content: '';
+			height: 51px;
+			z-index: -1;
+			position: absolute;
+			border-radius: 100%;
+			background-color: #fff;
+			transition: all 500ms ease-in-out;
+		}
 		i {
 			width: 51px;
 			height: 51px;
@@ -305,6 +377,15 @@ a {
 			text-transform: uppercase;
 			background: var(--tz-prime-c1);
 		}
+		&:hover {
+			span {
+				margin-left: -40px;
+				padding: 13px 24px 13px 48px;
+			}
+			&:before {
+				transform: scale(10);
+			}
+		}
 	}
 }
 
@@ -316,6 +397,21 @@ a {
 		line-height: 1.1;
 		letter-spacing: -2px;
 		padding-bottom: 15px;
+		@media #{$md} {
+			font-size: 50px;
+		}
+		@media #{$sm} {
+			font-size: 45px;
+		}
+		@media #{$xs} {
+			font-size: 40px;
+		}
+		@media #{$xxs} {
+			font-size: 36px;
+		}
+		@media #{$xxxs} {
+			font-size: 32px;
+		}
 	}
 	&:is(.text-center) {
 		margin: 0 auto;

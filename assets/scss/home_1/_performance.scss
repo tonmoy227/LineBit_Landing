@@ -64,7 +64,17 @@
 		padding: 30px 15px;
 	}
 }
-
+@keyframes rotateAnim {
+	0% {
+		transform: rotate(-135deg);
+	}
+	50% {
+		transform: rotate(45deg);
+	}
+	100% {
+		transform: rotate(-135deg);
+	}
+}
 .lb-perfor-prg-item1 {
 	gap: 20px;
 	width: 100%;
@@ -76,7 +86,14 @@
 		flex-wrap: wrap;
 	}
 	.item-img {
-		
+		transition: all 1000ms ease-in-out;
+		clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+		svg {
+			.line_1 {
+				transform-origin: 52px 53px;
+				animation: rotateAnim 2s ease-in-out infinite;
+			}
+		}
 	}
 	.item-text {
 		p {
@@ -88,6 +105,12 @@
 		h3 {
 			color: #02021E;
 			font-weight: 700;
+		}
+	}
+	&:is(.active) {
+		.item-img {
+			transition-delay: 300ms;
+			clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 		}
 	}
 }

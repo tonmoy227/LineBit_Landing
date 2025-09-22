@@ -15,9 +15,6 @@
 		&:last-child {
 			border-bottom: none;
 		}
-		@media #{$xxs} { 
-			padding: 23px 15px 23px 25px;
-		}
 	}
 	.accordion-button {
 		padding: 0;
@@ -65,6 +62,11 @@
 		font-family: 'Font Awesome 6 free';
 		transition: all 500ms ease;
 		background-color: #F6F6F6;
+		@media #{$xs,$xxs} {
+			width: 36px;
+			right: 15px;
+			height: 36px;
+		}
 	}
 	.accordion-button:not(.collapsed) { 
 		box-shadow: none;

@@ -8,7 +8,7 @@
 	@media #{$xxs} {
 		padding-top: 170px;
 	}
-	&:before {
+	.hero_gradiant {
 		bottom: 0;
 		z-index: -1;
 		left: 100px;
@@ -67,7 +67,16 @@
 		width: 100%;
 		margin-top: 40px;
 		padding-top: 40px;
-		border-top: 1px solid rgba(255, 255, 255, 0.6);
+		position: relative;
+		.top_line {
+			top: 0;
+			left: 0;
+			width: 100%;
+			content: '';
+			height: 1px;
+			position: absolute;
+			background-color:  rgba(255, 255, 255, 0.6);
+		}
 		@media #{$sm,$xs,$xxs} {
 			flex-wrap: wrap;
 		}
@@ -134,14 +143,17 @@
 		justify-content: center;
 	}
 	.img-item {
-		overflow: hidden;
-		border-radius: 12px;
 		position: absolute;
 		@media #{$lg,$md,$sm,$xs,$xxs} {
-			height: 260px;
-			overflow: hidden;
 			position: static;
 		}
+		.inner-img{
+			overflow: hidden;
+			border-radius: 12px;
+			@media #{$lg,$md,$sm,$xs,$xxs} {
+				height: 260px;
+			}
+		} 
 		@media #{$xxs} {
 			width: 100%;
 			img {

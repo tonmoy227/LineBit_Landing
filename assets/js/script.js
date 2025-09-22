@@ -29,39 +29,12 @@ Last change:    00/00/00
 	requestAnimationFrame(raf);
 
 
-	function TXTheaderSticky() {
-		var $window = $(window);
-		var lastScrollTop = 0;
-		var $header = $('.txa_sticky_header');
-		var headerHeight = $header.outerHeight() + 30;
-
-		$window.scroll(function () {
-			var windowTop = $window.scrollTop();
-
-			if (windowTop >= headerHeight) {
-				$header.addClass('txa_sticky');
-			} else {
-				$header.removeClass('txa_sticky');
-				$header.removeClass('txa_sticky_show');
-			}
-
-			if ($header.hasClass('txa_sticky')) {
-				if (windowTop < lastScrollTop) {
-					$header.addClass('txa_sticky_show');
-				} else {
-					$header.removeClass('txa_sticky_show');
-				}
-			}
-
-			lastScrollTop = windowTop;
-		});
-	}
-	TXTheaderSticky();
+	
 	jQuery(window).on('scroll', function() {
 		if (jQuery(window).scrollTop() > 250) {
-			jQuery('.ag-header-section.header_style_three, .ag-header-section.header_style_four').addClass('sticky-on')
+			jQuery('.lb-header-section').addClass('sticky-on')
 		} else {
-			jQuery('.ag-header-section.header_style_three, .ag-header-section.header_style_four').removeClass('sticky-on')
+			jQuery('.lb-header-section').removeClass('sticky-on')
 		}
 	});
 	$('.open_mobile_menu').on("click", function() {
@@ -84,6 +57,31 @@ Last change:    00/00/00
 	$('[data-background]').each(function() {
 		$(this).css('background-image', 'url('+ $(this).attr('data-background') + ')');
 	});
+
+	$('.lb-header-section .main-navigation li a').on("click", function(){
+		if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+			var target = $(this.hash);
+			target = target.length ? target : $('[name="DCSext.Level"' + this.hash.slice(1) +']');
+			if (target.length) {
+				$('html, body').animate({
+					scrollTop: target.offset().top -50
+				}, 1000);
+				return false;
+			}
+		}
+	});
+
+	if($('.nx-letter').length) {
+		var txtSplit = $('.nx-letter');
+		if(txtSplit.length == 0) return; gsap.registerPlugin(SplitText); txtSplit.each(function(index, el) {
+			el.split = new SplitText(el, { 
+				type: "chars",
+				wordsClass: "split-word"
+			});
+		});
+	}
+
+
 	gsap.registerPlugin(ScrollTrigger);
 	
 	// Animation
@@ -132,11 +130,106 @@ Last change:    00/00/00
 		startVisible:true,
 	});
 
+
+	$(window).on("scroll", function() {
+		if ($(this).scrollTop() > 200) {
+			$('.lb-scrollup').fadeIn();
+		} else {
+			$('.lb-scrollup').fadeOut();
+		}
+	});
+	$('.lb-scrollup').on("click", function()  {
+		$("html, body").animate({
+			scrollTop: 0
+		}, 800);
+		return false;
+	});
+
+
+	document.addEventListener("mousemove", (e) => {
+		window.requestAnimationFrame(() => {
+			document.querySelectorAll(".img_move").forEach((move) => {
+				const movingValue = parseFloat(move.dataset.value);
+				const x = (e.clientX * movingValue) / 250;
+				const y = (e.clientY * movingValue) / 250;
+
+				move.style.transform = `translate(${x}px, ${y}px)`;
+			});
+		});
+	});
+
+	if($(".lb-number").length) {
+		var AGTTitleAni = $(".lb-number");
+		if(AGTTitleAni.length == 0) return; gsap.registerPlugin(SplitText); AGTTitleAni.each(function(index, el) {
+
+			el.split = new SplitText(el, { 
+				type: "chars",
+				charsClass: "split-line"
+			});
+
+			gsap.set(el, { perspective: 400 });
+
+			if( $(el).hasClass('lb-number-anim') ){
+				gsap.set(el.split.chars, {
+					y: 100,
+					opacity: 0,
+					rotationX: -45,
+				});
+			}
+			el.anim = gsap.to(el.split.chars, {
+				scrollTrigger: {
+					trigger: el,
+					start: "top 90%",
+					toggleActions: "play reverse play reverse",
+					markers: false,
+				},
+				x: 0,
+				y: 0,
+				scaleX: 1,
+				scaleY: 1,
+				opacity: 1,
+				duration: 1,
+				stagger: .1,
+				rotationX: 0,
+				delay: .1,
+				ease: "power3.inOut",
+			});
+		});
+	}
+	if($('.lb_sec_title').length) {
+		var edtitle = $(".lb_sec_title");
+
+		if(edtitle.length == 0) return; gsap.registerPlugin(SplitText); edtitle.each(function(index, el) {
+
+			el.split = new SplitText(el, { 
+				type: "lines,words,chars",
+				linesClass: "split-line"
+			});
+
+			if( $(el).hasClass('lb_title_anim') ){
+				gsap.set(el.split.words, {
+					opacity: .3,
+					y: "100",
+				});
+			};
+			el.anim = gsap.to(el.split.words, {
+				scrollTrigger: {
+					trigger: el,
+					start: "top 90%",
+					markers: false
+				},
+
+				x: "0",
+				y: "0",
+				opacity: 1,
+				duration: 1,
+				stagger: 0.1,
+			});
+		});
+	}
 	// windows-loaded-before-functions
 	document.addEventListener("DOMContentLoaded", function () {
 		window.addEventListener('load', function(){
-
-			CustomEase.create("ease1", ".645,.045,.355,1");
 
 			let preloader = document.querySelector("#preloader");
 			if (preloader) {
@@ -146,7 +239,78 @@ Last change:    00/00/00
 				}, 1000 ) ;
 
 			}
+			
 			setTimeout(function() {
+				if($(".lb_hero_title").length) {
+					var AGTTitleAni = $(".lb_hero_title");
+					if(AGTTitleAni.length == 0) return; gsap.registerPlugin(SplitText); AGTTitleAni.each(function(index, el) {
+
+						el.split = new SplitText(el, { 
+							type: "lines",
+							linesClass: "split-line"
+						});
+
+						gsap.set(el, { perspective: 400 });
+
+						if( $(el).hasClass('hr_title') ){
+							gsap.set(el.split.lines, {
+								y: 100,
+								opacity: 0,
+								rotationX: -45,
+							});
+						}
+						el.anim = gsap.to(el.split.lines, {
+							scrollTrigger: {
+								trigger: el,
+								start: "top 90%",
+								toggleActions: "play reverse play reverse",
+								markers: false,
+							},
+							x: 0,
+							y: 0,
+							scaleX: 1,
+							scaleY: 1,
+							opacity: 1,
+							duration: 1,
+							stagger: .1,
+							rotationX: 0,
+							delay: .1,
+							ease: "power3.inOut",
+						});
+					});
+				}
+				gsap.utils.toArray(".lb-text p").forEach(paragraph => {
+					let timeline = gsap.timeline({
+						scrollTrigger: {
+							trigger: paragraph,
+							start: "top 90%",
+							end: "bottom 60%",
+							toggleActions: "play none none none"
+						}
+					});
+					let splitText = new SplitText(paragraph, { type: "lines" });
+					gsap.set(paragraph, { perspective: 400 });
+					timeline.from(splitText.lines, {
+						opacity: 0,
+						rotationX: -80,
+						transformOrigin: "top center -50",
+						force3D: true,
+						duration: 1,
+						delay: 0.5,
+						stagger: 0.1
+					});
+				});
+				const LNHERO = gsap.timeline();
+				LNHERO
+				.from(".lb-hero-sec .hero_gradiant", {  yPercent: 100, opacity: 0,   duration: 1, transformOrigin: "right", ease: "power1.out" },"<=.1")
+				.from(".lb-hero-img-wrap .item-img1", {  height: 0, y: -100, opacity: 0,   duration: 3, transformOrigin: "top", ease: "elastic.out(1,0.7)" })
+				.from(".lb-hero-img-wrap .item-img2", {  height: 0, x: 100, opacity: 0,   duration: 3, transformOrigin: "top", ease: "elastic.out(1,0.7)" },"<=.1")
+				.from(".lb-hero-img-wrap .item-img3", {  height: 0, x: -100, opacity: 0,   duration: 3, transformOrigin: "top", ease: "elastic.out(1,0.7)" },"<=.1")
+				.from(".lb-hero-img-wrap .item-img4", {  height: 0, opacity: 0,   duration: 3, transformOrigin: "bottom", ease: "elastic.out(1,0.7)" },"<=.1")
+				.from(".lb-hero-img-wrap .item-img5", {  height: 0, opacity: 0,   duration: 3, transformOrigin: "bottom", ease: "elastic.out(1,0.7)" },"<=.1")
+				.from(".lb-hero-text .desc-btn .top_line", {  width: 0, opacity: 0,   duration: 3, transformOrigin: "bottom", ease: "power1.out" },"<=.1")
+				.from(".lb-hero-text .desc-btn .lb-btn1", {  x: 100, opacity: 0,   duration: 1, transformOrigin: "right", ease: "power1.out" },"<=.1")
+				
 				
 			}, 700);
 		})		
@@ -222,6 +386,177 @@ Last change:    00/00/00
 				},
 			},
 		});
+	};
+
+
+	gsap.utils.toArray(' .top_view').forEach((el, index) => { 
+		let tlcta = gsap.timeline({
+			scrollTrigger: {
+				trigger: el,
+				scrub: 2,
+				start: "top 80%",
+				end: "top 60%",
+				toggleActions: "play none none reverse",
+				markers: false
+			}
+		})
+
+		tlcta
+		.set(el, {transformOrigin: 'center center'})
+		.from(el, { opacity: 0, xPercent: -50,  yPercent: 50})
+	});
+	gsap.utils.toArray(' .top_view1').forEach((el, index) => { 
+		let tlcta = gsap.timeline({
+			scrollTrigger: {
+				trigger: el,
+				scrub: 2,
+				start: "top 100%",
+				end: "top 60%",
+				toggleActions: "play none none reverse",
+				markers: false
+			}
+		})
+
+		tlcta
+		.set(el, {transformOrigin: 'center center'})
+		.from(el, {   yPercent: 20})
+	});
+	gsap.utils.toArray(' .top_view2').forEach((el, index) => { 
+		let tlcta = gsap.timeline({
+			scrollTrigger: {
+				trigger: el,
+				scrub: 2,
+				start: "top 110%",
+				end: "top 60%",
+				toggleActions: "play none none reverse",
+				markers: false
+			}
+		})
+
+		tlcta
+		.set(el, {transformOrigin: 'center center'})
+		.from(el, {   yPercent: -100})
+	});
+	gsap.utils.toArray(' .top_view3').forEach((el, index) => { 
+		let tlcta = gsap.timeline({
+			scrollTrigger: {
+				trigger: el,
+				scrub: 2,
+				start: "top 50%",
+				end: "top 20%",
+				toggleActions: "play none none reverse",
+				markers: false
+			}
+		})
+
+		tlcta
+		.set(el, {transformOrigin: 'center center'})
+		.from(el, { opacity: 0,  yPercent: -50})
+	});
+	gsap.utils.toArray(' .top_view4').forEach((el, index) => { 
+		let tlcta = gsap.timeline({
+			scrollTrigger: {
+				trigger: el,
+				scrub: 2,
+				start: "top 100%",
+				end: "top 60%",
+				toggleActions: "play none none reverse",
+				markers: false
+			}
+		})
+
+		tlcta
+		.set(el, {transformOrigin: 'center center'})
+		.from(el, { opacity: 0,   yPercent: 50})
+	});
+	gsap.utils.toArray(' .top_view5').forEach((el, index) => { 
+		let tlcta = gsap.timeline({
+			scrollTrigger: {
+				trigger: el,
+				scrub: 2,
+				start: "top 100%",
+				end: "top 60%",
+				toggleActions: "play none none reverse",
+				markers: false
+			}
+		})
+
+		tlcta
+		.set(el, {transformOrigin: 'center center'})
+		.from(el, { opacity: 0,   xPercent: -50})
+	});
+	gsap.utils.toArray('.lb-tools-img-wrap .item-img1').forEach((el) => { 
+		let tlcta = gsap.timeline({
+			scrollTrigger: {
+				trigger: el,
+				start: "top 90%",
+				end: "top 50%", 
+				duration: 2,
+				scrub: 1, 
+				toggleActions: "play none none reverse",
+				markers: false
+			}
+		});
+
+		tlcta.set(el, { transformOrigin: 'center center', transformPerspective: 1000 })
+		.fromTo(el, { rotationX: 15, y: -100,  scale: 1 }, { rotationX: 0, y: 0,  ease: "none" }
+			);
+	});
+	const boxes = gsap.utils.toArray('.txt_item_active');
+	boxes.forEach(svg => {
+		gsap.to(svg, {
+			scrollTrigger: {
+				trigger: svg,
+				start: "top 100%",
+				end: "bottom bottom",
+				toggleClass: "active",
+				duration: 3,
+				delay:1,
+				toggleActions: "play play play reverse",
+				once: true,
+			}
+		});
+	});
+
+
+	gsap.utils.toArray(".img-parallax").forEach(function(container) {
+		let image = container.querySelector("img");
+
+		let tl = gsap.timeline({
+			scrollTrigger: {
+				trigger: container,
+				scrub: true,
+				pin: false,
+
+			},
+		}); 
+		tl.from(image, {
+			yPercent: -30,
+			ease: "none",
+		}).to(image, {
+			yPercent: 30,
+			ease: "none",
+		}); 
+	});
+
+
+	if (window.matchMedia("(min-width: 1200px)").matches) { 
+		var TVCONT = gsap.timeline({
+			scrollTrigger: {
+				trigger: '.lb-footer-sec',
+				start: "top 30%",
+				toggleActions: 'play none none reverse',
+				markers: false,
+			}
+
+		});
+		TVCONT
+		.from(".lb-footer-sec .lb-footer-screen .ftr-screen1", { opacity: 0, scale: .4,  yPercent: -100, duration: 1,   ease: "power1.out" },"<= .5")
+		.from(".lb-footer-sec .lb-footer-screen .ftr-screen2", { opacity: 0, scale: .4,  yPercent: -100, duration: 1,   ease: "power1.out" },"<= .1")
+		.from(".lb-footer-sec .lb-footer-screen .ftr-screen3", { opacity: 0, scale: .4,  yPercent: -100, duration: 1,   ease: "power1.out" },"<= .1")
+		.from(".lb-footer-sec .lb-footer-screen .ftr-screen4", { opacity: 0, scale: .4,  yPercent: -100, duration: 1,   ease: "power1.out" },"<= .1")
+		.from(".lb-ftr-shape2", { opacity: 0, scale: .4,  rotate: 360, duration: 1,   ease: "power1.out" },"<= .1")
+		.from(".lb-ftr-text", { opacity: 0, yPercent: 100 ,  ease: "power1.out" },"<= .1")
 	};
 
 

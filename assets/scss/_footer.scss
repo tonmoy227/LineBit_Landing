@@ -1,20 +1,112 @@
 .lb-footer-sec {
+	z-index: 1;
 	padding-top: 120px;
 	background-color: #050505;
+	.lb-footer-screen {
+		top: 0;
+		left: 0;
+		z-index: -1;
+		width: 100%;
+		height: 100%;
+		@media #{$md,$sm,$xs,$xxs} {
+			display: none;
+		}
+		span {
+			overflow: hidden;
+			border-radius: 12px;
+		}
+		.ftr-screen1 {
+			top: 24%;
+			left: 5%;
+			@media #{$xxl} {
+				left: 15px;
+			}
+			@media #{$xl,$lg,$md,$sm,$xs,$xxs} {
+				display: none;
+			}
+		}
+		.ftr-screen2 {
+			top: 24%;
+			right: 5%;
+			@media #{$xxl} {
+				right: 15px;
+			}
+			@media #{$xl,$lg,$md,$sm,$xs,$xxs} {
+				display: none;
+			}
+		}
+		.ftr-screen3 {
+			left: 15%;
+			bottom: 23%;
+			@media #{$xl,$lg,$md,$sm,$xs,$xxs} {
+				left: 15px;
+			}
+		}
+		.ftr-screen4 {
+			right: 15%;
+			bottom: 23%;
+			@media #{$xl,$lg,$md,$sm,$xs,$xxs} {
+				right: 15px;
+			}
+		}
+	}
+}
+@keyframes handClick {
+	0%   { transform: translate(0, 0) scale(1); }
+	20%  { transform: translate(-10px, -10px) scale(1); }
+	40%  { transform: translate(-10px, -10px) scale(0.95); } 
+	60%  { transform: translate(-10px, -10px) scale(1); }  
+	100% { transform: translate(0, 0) scale(1); }
+}
+@keyframes breathing {
+	0%, 100% {
+		transform: scale(1);
+		opacity: 0.7;
+	}
+	50% {
+		transform: scale(1.05);
+		opacity: 1;
+	}
+}
+
+/* Color shifting animation */
+@keyframes colorShift {
+	0% {
+		filter: blur(110px) hue-rotate(0deg);
+	}
+	50% {
+		filter: blur(120px) hue-rotate(180deg);
+	}
+	100% {
+		filter: blur(110px) hue-rotate(360deg);
+	}
 }
 .lb-footer-content {
+	@media #{$xs,$xxs} {
+		padding: 0px 15px;
+	}
 	h3 {
 		color: #fff;
 		margin: 0 auto;
 		font-size: 72px;
 		max-width: 1150px;
 		font-family: "ADLaM Display", system-ui;
+		@media #{$sm} {
+			font-size: 60px;
+		}
+		@media #{$xs} {
+			font-size: 50px;
+		}
+		@media #{$xxs} {
+			font-size: 40px;
+		}
 	}
 	.lb-btn2 {
 		display: inline-block;
 		.lb-hand {
 			top: -30px;
 			right: -165px;
+			animation: handClick 2s infinite ease-in-out
 		}
 		a {
 			gap: 10px;
@@ -33,9 +125,39 @@
 				justify-content: center;
 				background-color: #fff;
 				transform: rotate(-45deg);
+				transition: all 500ms ease-in-out;
+			}
+			&:hover {
+				i {
+					transform: rotate(0deg);
+				}
 			}
 		}
 	}
+}
+.lb-ftr-text {
+	z-index: -2;
+	bottom: -60px;
+	position: relative;
+	@media #{$md,$sm,$xs,$xxs} {
+		bottom: 0;
+	}
+}
+.lb-ftr-shape {
+	right: 0;
+	left: -40%;
+	bottom: -40%;
+	z-index: -3;
+	width: 180%;
+	text-align: center;
+	animation: breathing 6s 
+	ease-in-out infinite, colorShift 8s 
+	linear infinite;
+}
+.lb-ftr-shape2 {
+	top: 70px;
+	right: 70px;
+	z-index: -2;
 }
 .lb-ftr-text-scroll {
 	padding-top: 25px;
