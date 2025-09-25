@@ -2657,6 +2657,7 @@ a:hover, a:focus {
   font-weight: 800;
   position: relative;
   padding-right: 50px;
+  white-space: nowrap;
   letter-spacing: -14px;
 }
 .lb-item-counter h3 span {
